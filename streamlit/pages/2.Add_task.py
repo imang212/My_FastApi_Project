@@ -37,39 +37,46 @@ def create_task_form():
         with col1:
             submit_button = st.form_submit_button(label="Add Task")
 
-        if submit_button:
-            if not title.strip():
-                st.error("Please enter a task title.")
-            else:
+    # Handle form submission
+    if submit_button:
+        if not title.strip():
+            st.error("Please enter a task title.")
+        else:
+            #
+            try:
                 # Prepare task data
                 task_data = {
                     "title": title,
                     "description": description,
                     "status": status
                 }
-                try:
-                    # Send POST request to FastAPI backend to add new task
-                    response = requests.post(f"{API_URL}/tasks/", json=task_data)
-                    response.raise_for_status()
+                # Send POST request to FastAPI backend to add new task
+                response = requests.post(f"{API_URL}/tasks/", json=task_data)
+                if response.status_code == 201:
+                    st.success("Task added successfully!")
                     st.balloons()
-
-                    # Zobrazení přidaného úkolu
+                    # Show created task details
                     created_task = response.json()
                     st.info(f"""
-                    **Vytvořený úkol:**
-                    - Název: {created_task['title']}
-                    - Popis: {created_task['description'] or 'Bez popisu'}
-                    - Status: {created_task['status']}
+                        **Vytvořený úkol:**
+                        - Název: {created_task['title']}
+                        - Popis: {created_task['description'] or 'Bez popisu'}
+                        - Status: {created_task['status']}
                     """)
-                    # Nabídka přidat další úkol nebo přejít na seznam
-                    col1, col2 = st.columns(2)
-                    #with col1:
-                    #    if st.form_submit_button(label="Přidat další úkol"):
-                    #        st.switch_page("pages/1_Zobrazit_ukoly.py")
                     st.success("Task added successfully!")
-                    st.rerun()  # Refresh the page to show updated task list
-                except requests.exceptions.RequestException as e:
-                    st.error(f"Error adding task: {e}")
+                else:
+                    st.error(f"Error adding task: {response.text}")
+            except requests.exceptions.RequestException as e:
+                st.error(f"Error adding task: {e}")
+    st.markdown("---")
+    # Nabídka přidat další úkol nebo přejít na seznam
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button(label="Přidat další úkol"):
+            st.switch_page("pages/1_Zobrazit_ukoly.py")
+    with col2:
+        if st.button("Domů", use_container_width=True):
+            st.switch_page("Home.py")
 
 create_task_form()
 st.markdown("---")
