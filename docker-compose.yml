@@ -1,0 +1,54 @@
+version: '3.8'
+services:
+  mariadb:
+    image: mariadb
+    container_name: my_fastapi_mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: tasks_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db_data:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
+
+  fastapi:
+    build:
+      context: ./fastapi
+      dockerfile: Dockerfile
+    container_name: my_fastapi_app
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mariadb
+    environment:
+      DATABASE_URL: mysql+pymysql://user:password@mariadb:3306/tasks_db
+
+  streamlit:
+    build:
+      context: ./streamlit
+      dockerfile: Dockerfile
+    container_name: my_streamlit_app
+    restart: always
+    ports:
+      - "8502:8501"
+    depends_on:
+      - fastapi
+    environment:
+      FASTAPI_URL: http://fastapi:8000
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - mariadb
+
+volumes:
+  db_data:
+
