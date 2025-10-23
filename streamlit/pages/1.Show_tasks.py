@@ -27,6 +27,7 @@ with col1:
 status_map = {
     "ALL": None,
     "NEW": "NEW",
+    "IN_PROGRESS": "IN_PROGRESS",
     "COMPLETED": "COMPLETED"
 }
 
@@ -70,20 +71,20 @@ def create_task_container():
 
                 with col2:
                     if task["status"] == "NEW":
-                        st.markdown("**Ststus:** <p style='color:green;'>NEW</p>")
-                    elif task["status"] == "COMPLETE":
-                        st.markdown("**Status:** <p style='color:green;'>COMPLETE</p>")
+                        st.markdown("**Ststus:** <p style='color:blue;'>NEW</p>", unsafe_allow_html=True)
+                    elif task["status"] == "COMPLETED":
+                        st.markdown("**Status:** <p style='color:green;'>COMPLETED</p>", unsafe_allow_html=True)
                     else:
-                        st.markdown("**Status:** <p style='color:orange;'>IN_PROGRESS</p>")
+                        st.markdown("**Status:** <p style='color:orange;'>IN PROGRESS</p>", unsafe_allow_html=True)
                 with col3:
-                    if task["status"] == "IN_PROGRESS":
+                    if task["status"] == "IN_PROGRESS" or task["status"] == "NEW":
                         if st.button("Hotovo", key=f"completed_{task['task_id']}"):
                             update_response = requests.put(
                                 f"{API_URL}/tasks/{task['task_id']}",
                                 json={"status": "COMPLETED"}
                             )
                             if update_response.status_code == 200:
-                                st.success("Úkol označen jako hotový!")
+                                #st.success("Úkol označen jako hotový!")
                                 st.rerun()
                             else:
                                 st.error("Chyba při aktualizaci úkolu")
@@ -94,7 +95,7 @@ def create_task_container():
                                 json={"status": "IN_PROGRESS"}
                             )
                             if update_response.status_code == 200:
-                                st.success("Úkol obnoven!")
+                                #st.success("Úkol obnoven!")
                                 st.rerun()
                             else:
                                 st.error("Chyba při aktualizaci úkolu")
@@ -103,7 +104,7 @@ def create_task_container():
                     if st.button("Smazat", key=f"delete_{task['task_id']}"):
                         delete_response = requests.delete(f"{API_URL}/tasks/{task['task_id']}")
                         if delete_response.status_code == 204:
-                            st.success("Úkol smazán!")
+                            #st.success("Úkol smazán!")
                             st.rerun()
                         else:
                             st.error("Chyba při mazání úkolu")

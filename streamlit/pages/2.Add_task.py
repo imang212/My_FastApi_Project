@@ -42,7 +42,7 @@ def create_task_form():
         if not title.strip():
             st.error("Please enter a task title.")
         else:
-            #
+            # Try to add the task via FastAPI backend
             try:
                 # Prepare task data
                 task_data = {
@@ -63,17 +63,18 @@ def create_task_form():
                         - Description: {created_task['description'] or 'Bez popisu'}
                         - Status: {created_task['status']}
                     """)
-                    st.success("Task added successfully!")
+                    st.markdown("---")
+                    # Nabídka přidat další úkol nebo přejít na seznam
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        if st.button(label="Add another task"):
+                            st.switch_page("pages/1.Show_tasks.py")
                 else:
                     st.error(f"Error adding task: {response.text}")
+
             except requests.exceptions.RequestException as e:
                 st.error(f"Error adding task: {e}")
-    st.markdown("---")
-    # Nabídka přidat další úkol nebo přejít na seznam
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button(label="Add another task"):
-            st.switch_page("pages/1.Show_tasks.py")
+
 
 create_task_form()
 st.markdown("---")
