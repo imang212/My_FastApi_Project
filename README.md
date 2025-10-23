@@ -1,13 +1,10 @@
 # Web Task Manager
-
 A modern web application for managing personal tasks built on microservice architecture using Docker containers.
 
 ## About the Project
-
 Web Task Manager is a fully functional application for managing personal tasks (TODO list) that demonstrates modern web application development with separation of frontend, backend, and database into standalone Docker containers.
 
 ### Key Features
-
 - **View Tasks** - Clear list of all tasks with filtering options
 - **Add Task** - Form for creating new tasks with title and description
 - **Change Status** - Mark tasks as NEW/IN_PROGRESS/COMPLETE with a single click
@@ -16,7 +13,6 @@ Web Task Manager is a fully functional application for managing personal tasks (
 - **Timestamps** - Automatic recording of task creation time
 
 ## Architecture
-
 The application uses a **microservice architecture** with three main components:
 
 ```
@@ -37,7 +33,6 @@ The application uses a **microservice architecture** with three main components:
 ```
 
 ### Components
-
 #### **Frontend - Streamlit**
 - Modern web user interface
 - Responsive design
@@ -56,7 +51,6 @@ The application uses a **microservice architecture** with three main components:
 - Persistent data storage
 
 ## Technologies:
-
 ### Backend
 - **FastAPI** 0.104.1 - Modern Python web framework
 - **SQLAlchemy** 2.0.23 - SQL toolkit and ORM
@@ -74,22 +68,18 @@ The application uses a **microservice architecture** with three main components:
 - **Docker Compose** - Multi-container orchestration
 
 ## Installation and Running
-
 ### Prerequisites
-
 - Docker Desktop installed on your system
 - Docker Compose (usually part of Docker Desktop)
 - Git (for cloning the repository)
 
 ### Step 1: Clone the Repository
-
 ```bash
 git clone https://github.com/your-username/web-task-manager.git
 cd web-task-manager
 ```
 
 ### Step 2: Start the Application
-
 ```bash
 docker-compose up --build
 ```
@@ -100,15 +90,12 @@ This command will:
 - Start all services
 
 ### Step 3: Open the Application
-
 After successful startup, open in your browser:
-
 - **Streamlit UI**: http://localhost:8501
 - **FastAPI Documentation**: http://localhost:8000/docs
 - **FastAPI Redoc**: http://localhost:8000/redoc
 
 ## Project Structure
-
 ```
 My_FastApi_Project/
 ├── docker-compose.yml          # Docker container orchestration
@@ -131,7 +118,6 @@ My_FastApi_Project/
 ```
 
 ## API Endpoints
-
 The backend provides the following REST API endpoints:
 
 ### GET `/tasks/`
@@ -181,9 +167,7 @@ Deletes a task by ID
 **Response:** 204 No Content
 
 ## Database Schema
-
 ### Table `tasks_db`
-
 | Column | Type | Description |
 |---------|-----|-------|
 | `task_id` | INT (PK, AUTO_INCREMENT) | Unique task identifier |
@@ -193,7 +177,6 @@ Deletes a task by ID
 | `created_at` | TIMESTAMP | Task creation time | NOT NULL
 
 ## Docker Configuration
-
 ### Services
 
 **db** - MariaDB database
@@ -211,14 +194,12 @@ Deletes a task by ID
 - Environment: Automatic API URL configuration
 
 ### Data Persistence
-
 Data is stored in the Docker volume `db_data`, which means:
 - Data persists through container restarts
 - Data is isolated from the host system
 - Data is **deleted** with `docker-compose down -v`
 
 ## Stopping the Application
-
 ### Standard stop (preserves data)
 ```bash
 docker-compose down
@@ -236,7 +217,6 @@ docker-compose restart streamlit
 ```
 
 ## Development and Debugging
-
 ### View logs
 ```bash
 # All services
@@ -261,47 +241,35 @@ docker-compose exec db mysql -u uzivatel -p ukoly_db
 ```
 
 ### Hot Reload
-
 Both applications (FastAPI and Streamlit) support **automatic reload** when code changes:
-
 - **FastAPI**: Uses `--reload` flag that detects changes in `main.py`
 - **Streamlit**: Automatically detects changes in Python files
 
 Simply edit a file and changes will take effect immediately (may need to refresh the page in browser).
 
 ## Possible Extensions
-
 The project can be extended with the following features:
-
-- [ ] **Edit Tasks** - Ability to modify title and description of existing tasks
-- [ ] **Due Date** - Add `due_date` field for deadlines
-- [ ] **Task Priority** - Mark importance (high/medium/low)
-- [ ] **Categories** - Organize tasks into categories
-- [ ] **Search** - Full-text search in tasks
-- [ ] **User Accounts** - Authentication and separate tasks by user
-- [ ] **Data Export** - Export tasks to CSV/JSON
-- [ ] **Notifications** - Email alerts for approaching deadlines
-- [ ] **Dark Mode** - Dark theme for Streamlit UI
-- [ ] **API Rate Limiting** - Protection against API abuse
-- [ ] **Unit Tests** - Automated code testing
-- [ ] **CI/CD Pipeline** - Automatic deployment
+- **Edit Tasks** - Ability to modify title and description of existing tasks
+- **Due Date** - Add `due_date` field for deadlines
+- **Task Priority** - Mark importance (high/medium/low)
+- **Categories** - Organize tasks into categories
+- **Search** - Full-text search in tasks
+- **User Accounts** - Authentication and separate tasks by user
+- **Data Export** - Export tasks to CSV/JSON
+- **Notifications** - Email alerts for approaching deadlines
+- **Dark Mode** - Dark theme for Streamlit UI
+- **API Rate Limiting** - Protection against API abuse
+- **Unit Tests** - Automated code testing
+- **CI/CD Pipeline** - Automatic deployment
 
 ## How to Contribute
-
 1. Fork this repository
 2. Create a new branch (`git checkout -b feature/new-feature`)
 3. Commit your changes (`git commit -m 'Add new feature'`)
 4. Push to the branch (`git push origin feature/new-feature`)
 5. Open a Pull Request
 
-## License
-
-This project is open-source and available under the [Apache 2.0 License](LICENSE).
-
----
-
 ## Troubleshooting
-
 ### Containers won't start
 ```bash
 # Check if another application is already using the ports
