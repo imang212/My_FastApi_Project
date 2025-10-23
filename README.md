@@ -273,18 +273,18 @@ Simply edit a file and changes will take effect immediately (may need to refresh
 
 The project can be extended with the following features:
 
-- [ ] **Edit Tasks** - Ability to modify title and description of existing tasks
-- [ ] **Due Date** - Add `due_date` field for deadlines
-- [ ] **Task Priority** - Mark importance (high/medium/low)
-- [ ] **Categories** - Organize tasks into categories
-- [ ] **Search** - Full-text search in tasks
-- [ ] **User Accounts** - Authentication and separate tasks by user
-- [ ] **Data Export** - Export tasks to CSV/JSON
-- [ ] **Notifications** - Email alerts for approaching deadlines
-- [ ] **Dark Mode** - Dark theme for Streamlit UI
-- [ ] **API Rate Limiting** - Protection against API abuse
-- [ ] **Unit Tests** - Automated code testing
-- [ ] **CI/CD Pipeline** - Automatic deployment
+- **Edit Tasks** - Ability to modify title and description of existing tasks
+- **Due Date** - Add `due_date` field for deadlines
+- **Task Priority** - Mark importance (high/medium/low)
+- **Categories** - Organize tasks into categories
+- **Search** - Full-text search in tasks
+- **User Accounts** - Authentication and separate tasks by user
+- **Data Export** - Export tasks to CSV/JSON
+- **Notifications** - Email alerts for approaching deadlines
+- **Dark Mode** - Dark theme for Streamlit UI
+- **API Rate Limiting** - Protection against API abuse
+- **Unit Tests** - Automated code testing
+- **CI/CD Pipeline** - Automatic deployment
 
 ## How to Contribute
 
