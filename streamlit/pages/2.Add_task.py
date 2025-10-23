@@ -58,9 +58,9 @@ def create_task_form():
                     # Show created task details
                     created_task = response.json()
                     st.info(f"""
-                        **Vytvořený úkol:**
-                        - Název: {created_task['title']}
-                        - Popis: {created_task['description'] or 'Bez popisu'}
+                        **Task created:**
+                        - Name: {created_task['title']}
+                        - Description: {created_task['description'] or 'Bez popisu'}
                         - Status: {created_task['status']}
                     """)
                     st.success("Task added successfully!")
@@ -72,11 +72,8 @@ def create_task_form():
     # Nabídka přidat další úkol nebo přejít na seznam
     col1, col2 = st.columns(2)
     with col1:
-        if st.button(label="Přidat další úkol"):
-            st.switch_page("pages/1_Zobrazit_ukoly.py")
-    with col2:
-        if st.button("Domů", use_container_width=True):
-            st.switch_page("Home.py")
+        if st.button(label="Add another task"):
+            st.switch_page("pages/1.Show_tasks.py")
 
 create_task_form()
 st.markdown("---")

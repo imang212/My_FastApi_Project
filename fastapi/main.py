@@ -58,6 +58,7 @@ class Task(BaseModel):
     description: str
     status: str
     created_at: datetime
+    created_at_converted_date: Optional[str] = None
 
     class Config:
         from_attributes = True

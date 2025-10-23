@@ -4,6 +4,7 @@ import streamlit as st
 import requests
 # OS library for environment variables
 import os
+from datetime import datetime
 
 # FastAPI backend configuration URL from environment variable or default
 API_URL = os.getenv("FASTAPI_URL", "http://fastapi:8000")
@@ -26,19 +27,22 @@ with col1:
 status_map = {
     "ALL": None,
     "NEW": "NEW",
-    "IN_PROGRESS": "IN_PROGRESS",
     "COMPLETED": "COMPLETED"
 }
 
 # Function to fetch tasks from FastAPI backend
 def fetch_tasks():
     try:
+        # Prepare query parameters based on filter
         params = {}
         if status_map[filter_status]:
             params["status"] = status_map[filter_status]
+        # Make GET request to fetch tasks
         response = requests.get(f"{API_URL}/tasks/", params=params)
+        # Raise error for bad responses
         response.raise_for_status()
-        return response.json() # Return JSON response as list of tasks
+        # Return JSON response as list of tasks
+        return response.json()
     except requests.exceptions.RequestException as e:
         st.error(f"Error fetching tasks: {e}")
         return []
@@ -52,21 +56,25 @@ def create_task_container():
         st.success(f"Fetched {len(tasks)} tasks.")
         # Display tasks in a table
         for task in tasks:
+            # Convert created_at to readable format
+            task['created_at_converted_date'] = datetime.fromisoformat(str(task["created_at"])).strftime("%d.%m.%Y at %H:%M")
+            # Create a container for each task
             with st.container():
+                # create columns for task details and action buttons
                 col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
-
                 with col1:
-                    st.markdown(f"### **{task['status']}** - {task['title']}")
+                    st.markdown(f"### **{task['title']}**")
                     if task['description']:
                         st.markdown(f"{task['description']}")
-                    st.markdown(f"*Created at: {task['created_at']}*")
+                    st.markdown(f"{task['created_at_converted_date']}*")
 
                 with col2:
                     if task["status"] == "NEW":
-                        st.markdown("**Ststus:** NEW")
+                        st.markdown("**Ststus:** <p style='color:green;'>NEW</p>")
+                    elif task["status"] == "COMPLETE":
+                        st.markdown("**Status:** <p style='color:green;'>COMPLETE</p>")
                     else:
-                        st.markdown("**Status:** IN PROGRESS" if task["status"] == "IN_PROGRESS" else "**Status:** COMPLETED")
-
+                        st.markdown("**Status:** <p style='color:orange;'>IN_PROGRESS</p>")
                 with col3:
                     if task["status"] == "IN_PROGRESS":
                         if st.button("Hotovo", key=f"completed_{task['task_id']}"):
