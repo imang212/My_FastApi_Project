@@ -93,7 +93,7 @@ cd web-task-manager
 docker-compose up --build
 ```
 
-This command will:\
+This command will:
 - Download necessary Docker images
 - Build containers for frontend, backend, and database
 - Start all services
@@ -101,7 +101,6 @@ This command will:\
 ### Step 3: Open the Application
 
 After successful startup, open in your browser:
-
 - **Streamlit UI**: http://localhost:8501
 - **FastAPI Documentation**: http://localhost:8000/docs
 - **FastAPI Redoc**: http://localhost:8000/redoc
@@ -210,7 +209,6 @@ Deletes a task by ID
 - Environment: Automatic API URL configuration
 
 ### Data Persistence
-
 Data is stored in the Docker volume `db_data`, which means:
 - Data persists through container restarts
 - Data is isolated from the host system
@@ -262,7 +260,6 @@ docker-compose exec db mysql -u uzivatel -p ukoly_db
 ### Hot Reload
 
 Both applications (FastAPI and Streamlit) support **automatic reload** when code changes:
-
 - **FastAPI**: Uses `--reload` flag that detects changes in `main.py`
 - **Streamlit**: Automatically detects changes in Python files
 
@@ -271,7 +268,6 @@ Simply edit a file and changes will take effect immediately (may need to refresh
 ## Possible Extensions
 
 The project can be extended with the following features:
-
 - **Edit Tasks** - Ability to modify title and description of existing tasks
 - **Due Date** - Add `due_date` field for deadlines
 - **Task Priority** - Mark importance (high/medium/low)
@@ -292,12 +288,6 @@ The project can be extended with the following features:
 3. Commit your changes (`git commit -m 'Add new feature'`)
 4. Push to the branch (`git push origin feature/new-feature`)
 5. Open a Pull Request
-
-## License
-
-This project is open-source and available under the [Apache 2.0 License](LICENSE).
-
----
 
 ## Troubleshooting
 
