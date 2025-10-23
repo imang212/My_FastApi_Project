@@ -93,7 +93,7 @@ cd web-task-manager
 docker-compose up --build
 ```
 
-This command will:
+This command will:\
 - Download necessary Docker images
 - Build containers for frontend, backend, and database
 - Start all services
