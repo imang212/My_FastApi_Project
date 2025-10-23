@@ -1,9 +1,7 @@
 # Web Task Manager
-
 A modern web application for managing personal tasks built on microservice architecture using Docker containers.
 
 ## About the Project
-
 Web Task Manager is a fully functional application for managing personal tasks (TODO list) that demonstrates modern web application development with separation of frontend, backend, and database into standalone Docker containers.
 
 ### Key Features
@@ -15,7 +13,6 @@ Web Task Manager is a fully functional application for managing personal tasks (
 - **Timestamps** - Automatic recording of task creation time
 
 ## Architecture
-
 The application uses a **microservice architecture** with three main components:
 
 ```
@@ -36,7 +33,6 @@ The application uses a **microservice architecture** with three main components:
 ```
 
 ### Components
-
 #### **Frontend - Streamlit**
 - Modern web user interface
 - Responsive design
@@ -55,7 +51,6 @@ The application uses a **microservice architecture** with three main components:
 - Persistent data storage
 
 ## Technologies:
-
 ### Backend
 - **FastAPI** 0.104.1 - Modern Python web framework
 - **SQLAlchemy** 2.0.23 - SQL toolkit and ORM
@@ -73,22 +68,18 @@ The application uses a **microservice architecture** with three main components:
 - **Docker Compose** - Multi-container orchestration
 
 ## Installation and Running
-
 ### Prerequisites
-
 - Docker Desktop installed on your system
 - Docker Compose (usually part of Docker Desktop)
 - Git (for cloning the repository)
 
 ### Step 1: Clone the Repository
-
 ```bash
 git clone https://github.com/your-username/web-task-manager.git
 cd web-task-manager
 ```
 
 ### Step 2: Start the Application
-
 ```bash
 docker-compose up --build
 ```
@@ -99,14 +90,12 @@ This command will:
 - Start all services
 
 ### Step 3: Open the Application
-
 After successful startup, open in your browser:
 - **Streamlit UI**: http://localhost:8501
 - **FastAPI Documentation**: http://localhost:8000/docs
 - **FastAPI Redoc**: http://localhost:8000/redoc
 
 ## Project Structure
-
 ```
 My_FastApi_Project/
 ├── docker-compose.yml          # Docker container orchestration
@@ -129,7 +118,6 @@ My_FastApi_Project/
 ```
 
 ## API Endpoints
-
 The backend provides the following REST API endpoints:
 
 ### GET `/tasks/`
@@ -179,9 +167,7 @@ Deletes a task by ID
 **Response:** 204 No Content
 
 ## Database Schema
-
 ### Table `tasks_db`
-
 | Column | Type | Description |
 |---------|-----|-------|
 | `task_id` | INT (PK, AUTO_INCREMENT) | Unique task identifier |
@@ -191,7 +177,6 @@ Deletes a task by ID
 | `created_at` | TIMESTAMP | Task creation time | NOT NULL
 
 ## Docker Configuration
-
 ### Services
 
 **db** - MariaDB database
@@ -215,7 +200,6 @@ Data is stored in the Docker volume `db_data`, which means:
 - Data is **deleted** with `docker-compose down -v`
 
 ## Stopping the Application
-
 ### Standard stop (preserves data)
 ```bash
 docker-compose down
@@ -233,7 +217,6 @@ docker-compose restart streamlit
 ```
 
 ## Development and Debugging
-
 ### View logs
 ```bash
 # All services
@@ -258,7 +241,6 @@ docker-compose exec db mysql -u uzivatel -p ukoly_db
 ```
 
 ### Hot Reload
-
 Both applications (FastAPI and Streamlit) support **automatic reload** when code changes:
 - **FastAPI**: Uses `--reload` flag that detects changes in `main.py`
 - **Streamlit**: Automatically detects changes in Python files
@@ -266,7 +248,6 @@ Both applications (FastAPI and Streamlit) support **automatic reload** when code
 Simply edit a file and changes will take effect immediately (may need to refresh the page in browser).
 
 ## Possible Extensions
-
 The project can be extended with the following features:
 - **Edit Tasks** - Ability to modify title and description of existing tasks
 - **Due Date** - Add `due_date` field for deadlines
@@ -282,7 +263,6 @@ The project can be extended with the following features:
 - **CI/CD Pipeline** - Automatic deployment
 
 ## How to Contribute
-
 1. Fork this repository
 2. Create a new branch (`git checkout -b feature/new-feature`)
 3. Commit your changes (`git commit -m 'Add new feature'`)
@@ -290,7 +270,6 @@ The project can be extended with the following features:
 5. Open a Pull Request
 
 ## Troubleshooting
-
 ### Containers won't start
 ```bash
 # Check if another application is already using the ports
