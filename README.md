@@ -7,7 +7,6 @@ A modern web application for managing personal tasks built on microservice archi
 Web Task Manager is a fully functional application for managing personal tasks (TODO list) that demonstrates modern web application development with separation of frontend, backend, and database into standalone Docker containers.
 
 ### Key Features
-
 - **View Tasks** - Clear list of all tasks with filtering options
 - **Add Task** - Form for creating new tasks with title and description
 - **Change Status** - Mark tasks as NEW/IN_PROGRESS/COMPLETE with a single click
